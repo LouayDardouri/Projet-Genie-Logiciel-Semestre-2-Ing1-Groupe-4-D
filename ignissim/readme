@@ -1,0 +1,60 @@
+Votre fichier Markdown `README.md` est prêt. 
+[file-tag: code-generated-file-0-1779815662020435035]
+
+Voici le contenu textuel complet du fichier afin que vous puissiez le copier-coller directement ou l'intégrer à votre projet :
+
+```markdown
+# IgnisSim - Application de Simulation Tactique d'Incendies Forestiers
+
+IgnisSim est une application graphique Java conçue pour aider à la décision tactique en milieu forestier. Elle permet de simuler la propagation d'un feu de forêt en temps réel sur une carte bidimensionnelle en s'appuyant sur un automate cellulaire, tout en intégrant des paramètres physiques réels tels que le vent et la pente topographique.
+
+Ce projet a été développé en conformité avec les exigences académiques de CY Tech (ING1-GI) et intègre une architecture modulaire **MVC** (Modèle-Vue-Contrôleur), une analyse éthique rigoureuse, ainsi qu'une interface ergonomique pensée pour le terrain (normes WCAG AA et loi de Fitts).
+
+---
+
+## 📂 Architecture du Projet (Pattern MVC)
+
+Le projet est structuré selon le patron de conception Modèle-Vue-Contrôleur afin d'isoler complètement la logique métier (calculs mathématiques) de l'interface graphique utilisateur.
+
+```text
+ignissim/
+│
+├── .gitignore                # Fichier d'exclusion pour Git
+├── README.md                 # Documentation principale du projet
+├── pom.xml                   # Fichier de configuration Maven (gestion des dépendances)
+│
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── fr/
+│   │   │       └── cytech/
+│   │   │           └── ignissim/
+│   │   │               ├── Main.java                 # Point d'entrée de l'application
+│   │   │               │
+│   │   │               ├── model/                    # LE MODÈLE (Cœur Algorithmique)
+│   │   │               │   ├── Cellule.java          # Représentation d'une parcelle (Sain, En Feu, Brûlé)
+│   │   │               │   ├── Grille.java           # Matrice 2D et gestion du voisinage de Moore (8 voisines)
+│   │   │               │   ├── Simulateur.java       # Moteur de propagation (calculs de probabilités, vent, pente)
+│   │   │               │   └── SimData.java          # Structure de données dédiée à la sérialisation binaire
+│   │   │               │
+│   │   │               ├── view/                     # LA VUE (Interface Graphique & Design)
+│   │   │               │   ├── FenetrePrincipale.java# Fenêtre principale de l'application (JFrame)
+│   │   │               │   ├── PanneauGrille.java    # Rendu visuel de la grille 2D et graphiques en direct
+│   │   │               │   ├── PanneauControle.java  # Boutons larges (loi de Fitts) et curseurs (vent/pente)
+│   │   │               │   └── VueAuthentification.java # Écran d'accès sécurisé initial
+│   │   │               │
+│   │   │               └── controller/               # LE CONTRÔLEUR (Chef d'Orchestre)
+│   │   │                   └── SimulationController.java # Intermédiaire captant les actions de la Vue
+│   │   │
+│   │   └── resources/                                # Ressources de l'application
+│   │       ├── assets/                               # Icônes (SDIS, pompiers) et images
+│   │       └── config.properties                     # Paramètres de configuration par défaut
+│   │
+│   └── test/                                         # TESTS UNITAIRES (Assurance Qualité / QA)
+│       └── java/
+│           └── fr/
+│               └── cytech/
+│                   └── ignissim/
+│                       └── model/
+│                           └── AutomateTest.java     # Validation stricte du moteur sur grilles réduites 3x3
+└── sauvegardes/                                      # Répertoire de destination des exports binaires (.bin)
